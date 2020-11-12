@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="Description" content="Author: Archivist Nerd,
+    Description: Details on items created in the process of completing 'the project.',
+    Size: 3kb">
+  <title>archivist-nerd</title>
+</head>
+<style>
+/* Theme Colors */
+:root {
+  --hero-color: #1c348e;
+  --primary-color: #fff;
+  --primary-text-color: #000;
+  --secondary-color: #333;
+  --secondary-text-color: #fff;
+}
+
+body {
+  background: var(--primary-color, #fff);
+  color: var(--primary-text-color, #333);
+}
+a {
+  color: var(--primary-text-color, #333);
+}
+.panel a, .footer a {
+  color: var(--secondary-text-color, #fff);
+}
+.panel, .footer {
+  background: var(--secondary-color, #333);
+  color: var(--secondary-text-color, #fff);
+}
+/* Universal Box Sizing with Inheritance */
+html                  {  box-sizing: border-box; }
+*, *:before, *:after  {  box-sizing: inherit; }
+
+/* Page Template */
+body                  { margin: 0px; }
+a                     { text-decoration: none; }
+
+/* content: column layout */
+body {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 65% 35%;
+  grid-template-rows: auto min-content;
+  grid-template-areas:
+              "content about"
+              "footer  footer";
+}
+
+.about {
+  align-self: center;
+  grid-area: about;
+  padding: 30px;
+}
+
+.panel {
+  padding: 10px 20px;
+  border-top: 10px solid var(--hero-color);
+}
+
+.content {
+  grid-area: content;
+  align-self: center;
+  padding: 30px;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(6,min-content);
+  justify-content: center;
+}
+
+.details h1 {
+  text-align: center;
+}
+
+.details :nth-last-child(1) {
+  border-right: 0px;
+}
+
+.item {
+  padding: 0px 10px;
+  border-right: 4px solid var(--hero-color);
+}
+
+.footer {
+  grid-area: footer;
+  padding: 5px;
+  text-align: center;
+  border-top: 4px solid var(--hero-color);
+}
+</style>
+<body>
+<div class="about">
+  <div class="panel">
+    <h1>@archivistnerd</h1>
+    <p>Documenting the list of items created for the completion of 'the project.'</p>
+    <br>
+    <h2>More details possibly found at</h2>
+    <ul>
+      <li><a href="https://twitter.com/archivistnerd" target="_blank" rel="noreferrer">Twitter</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="content">
+  <div class="details">
+    <div class="item"><h1>1</h1><h2>Project</h2></div>
+    <div class="item"><a href="https://archivistnerd.netlify.app/"   target="_blank" rel="noreferrer"><h1>1</h1><h2>website</h2></a></div>
+    <div class="item"><a href="https://codepen.io/archivistnerd"     target="_blank" rel="noreferrer"><h1>2</h1><h2>pens codepen.io</h2></a></div>
+    <div class="item"><a href="https://www.npmjs.com/org/archivist"  target="_blank" rel="noreferrer"><h1>2</h1><h2>tools (node)</h2></a></div>
+    <div class="item"><a href="https://www.npmjs.com/~archivistnerd" target="_blank" rel="noreferrer"><h1>6</h1><h2>npmjs packages</h2></a></div>
+    <div class="item"><a href="https://github.com/Archivist-Nerd"    target="_blank" rel="noreferrer"><h1>8</h1><h2>github repositories</h2></a></div>
+  </div>
+</div>
+
+<div class="footer">© 2020 <a href="https://archivistnerd.netlify.app/" target="_blank" rel="noreferrer">archivistnerd.</a></div>
+  
+</body>
+</html>
