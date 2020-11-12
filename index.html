@@ -1,13 +1,17 @@
 
 <!DOCTYPE html>
 <html lang="en" >
+<!--
+  author:  archivistnerd
+  version: 0.2.0
+-->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="Description" content="Author: Archivist Nerd,
     Description: Details on items created in the process of completing 'the project.',
     Size: 3kb">
-  <title>archivist-nerd</title>
+  <title>Down the Rabbit hole</title>
 </head>
 <style>
 /* Theme Colors */
@@ -74,18 +78,20 @@ body {
   grid-template-columns: repeat(6,min-content);
   justify-content: center;
 }
-
 .details h1 {
-  text-align: center;
+  padding: 0px 10px;
+  grid-column-start: 1;
+  grid-column-end:7;
 }
-
-.details :nth-last-child(1) {
-  border-right: 0px;
+.details h2 {
+  color: var(--hero-color);
+}
+.details h2, .details h3 {
+  text-align: center;
 }
 
 .item {
   padding: 0px 10px;
-  border-right: 4px solid var(--hero-color);
 }
 
 .footer {
@@ -94,11 +100,44 @@ body {
   text-align: center;
   border-top: 4px solid var(--hero-color);
 }
+
+@media screen and (max-width: 908px) {
+  body {
+    grid-template-columns: 50% 50%;
+  }
+  .details {
+    grid-template-columns: repeat(3,min-content);
+  }
+  .details h1 {
+    grid-column-end: 4;
+  }
+  .item {
+    border-left: 0px;
+  }
+}
+@media screen and (max-width: 600px) {
+  body {
+    grid-template-columns: 100%;
+    grid-template-areas:
+                "content"
+                "about"
+                "footer";
+  }
+  .about {
+    padding: 0px;
+  }
+  .details {
+    grid-template-columns: repeat(3,min-content);
+  }
+  .footer {
+    border-top: 0px;
+  }
+}
 </style>
 <body>
 <div class="about">
   <div class="panel">
-    <h1>@archivistnerd</h1>
+    <h1>@rabbit hole</h1>
     <p>Documenting the list of items created for the completion of 'the project.'</p>
     <br>
     <h2>More details possibly found at</h2>
@@ -110,16 +149,16 @@ body {
 
 <div class="content">
   <div class="details">
-    <div class="item"><h1>1</h1><h2>Project</h2></div>
-    <div class="item"><a href="https://archivistnerd.netlify.app/"   target="_blank" rel="noreferrer"><h1>1</h1><h2>website</h2></a></div>
-    <div class="item"><a href="https://codepen.io/archivistnerd"     target="_blank" rel="noreferrer"><h1>2</h1><h2>pens codepen.io</h2></a></div>
-    <div class="item"><a href="https://www.npmjs.com/org/archivist"  target="_blank" rel="noreferrer"><h1>2</h1><h2>tools (node)</h2></a></div>
-    <div class="item"><a href="https://www.npmjs.com/~archivistnerd" target="_blank" rel="noreferrer"><h1>6</h1><h2>npmjs packages</h2></a></div>
-    <div class="item"><a href="https://github.com/Archivist-Nerd"    target="_blank" rel="noreferrer"><h1>8</h1><h2>github repositories</h2></a></div>
+    <h1>the Project</h1>
+    <div class="item"><a href="https://archivistnerd.netlify.app/"   target="_blank" rel="noreferrer"><h2>1</h2><h3>website</h3></a></div>
+    <div class="item"><a href="https://codepen.io/archivistnerd"     target="_blank" rel="noreferrer"><h2>2</h2><h3>tools (node)</h3></a></div>
+    <div class="item"><a href="https://www.npmjs.com/~archivistnerd" target="_blank" rel="noreferrer"><h2>3</h2><h3>pens codepen.io</h3></a></div>
+    <div class="item"><a href="https://www.npmjs.com/org/archivist"  target="_blank" rel="noreferrer"><h2>6</h2><h3>npmjs packages</h3></a></div>
+    <div class="item"><a href="https://github.com/Archivist-Nerd"    target="_blank" rel="noreferrer"><h2>8</h2><h3>github repositories</h3></a></div>
   </div>
 </div>
 
 <div class="footer">© 2020 <a href="https://archivistnerd.netlify.app/" target="_blank" rel="noreferrer">archivistnerd.</a></div>
-  
+
 </body>
 </html>
