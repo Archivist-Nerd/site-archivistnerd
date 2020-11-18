@@ -3,14 +3,14 @@
 <html lang="en" >
 <!--
   author:  archivistnerd
-  version: 0.2.0
+  version: 0.3.0
 -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="Description" content="Author: Archivist Nerd,
     Description: Details on items created in the process of completing 'the project.',
-    Size: 3kb">
+    Size: 4.95kb">
   <title>Down the Rabbit hole</title>
 </head>
 <style>
@@ -119,9 +119,9 @@ body {
   body {
     grid-template-columns: 100%;
     grid-template-areas:
-                "content"
-                "about"
-                "footer";
+        "content"
+        "about"
+        "footer";
   }
   .about {
     padding: 0px;
@@ -150,15 +150,39 @@ body {
 <div class="content">
   <div class="details">
     <h1>the Project</h1>
-    <div class="item"><a href="https://archivistnerd.netlify.app/"   target="_blank" rel="noreferrer"><h2>1</h2><h3>website</h3></a></div>
-    <div class="item"><a href="https://codepen.io/archivistnerd"     target="_blank" rel="noreferrer"><h2>2</h2><h3>tools (node)</h3></a></div>
-    <div class="item"><a href="https://www.npmjs.com/~archivistnerd" target="_blank" rel="noreferrer"><h2>3</h2><h3>pens codepen.io</h3></a></div>
-    <div class="item"><a href="https://www.npmjs.com/org/archivist"  target="_blank" rel="noreferrer"><h2>6</h2><h3>npmjs packages</h3></a></div>
-    <div class="item"><a href="https://github.com/Archivist-Nerd"    target="_blank" rel="noreferrer"><h2>8</h2><h3>github repositories</h3></a></div>
+    <div class="item"><a href="https://archivistnerd.netlify.app/"   target="_blank" rel="noreferrer"><h2            >1</h2><h3>website</h3></a></div>
+    <div class="item"><a href="https://codepen.io/archivistnerd"     target="_blank" rel="noreferrer"><h2 data-npmapp>2</h2><h3>tools (node)</h3></a></div>
+    <div class="item"><a href="https://www.npmjs.com/~archivistnerd" target="_blank" rel="noreferrer"><h2            >4</h2><h3>pens codepen.io</h3></a></div>
+    <div class="item"><a href="https://www.npmjs.com/org/archivist"  target="_blank" rel="noreferrer"><h2 data-npmpkg>5</h2><h3>npmjs packages</h3></a></div>
+    <div class="item"><a href="https://github.com/Archivist-Nerd"    target="_blank" rel="noreferrer"><h2 data-github>8</h2><h3>github repositories</h3></a></div>
   </div>
 </div>
 
 <div class="footer">© 2020 <a href="https://archivistnerd.netlify.app/" target="_blank" rel="noreferrer">archivistnerd.</a></div>
 
 </body>
+<script>
+const Fetch = ( url, query='[data-error]', callback=()=>{} )=>{
+      fetch( url ).then( res=> {
+        res.text()
+           .then( text=>{
+                  try {
+                    let json = JSON.parse(text)
+                      , val  = callback(text,json)
+                      ;
+                    document.querySelectorAll(query).forEach( el=> el.innerText = val )
+                  } catch (err){}
+                })
+      })
+    };
+
+window.addEventListener('load',()=>{
+  // npm-apps
+  Fetch('https://registry.npmjs.org/-/v1/search?text=@archivist&size=555', '[data-npmapp]', (text,json) => json.total )
+  // npm-packages
+  Fetch('https://registry.npmjs.org/-/v1/search?text=@archivistnerd&size=555', '[data-npmpkg]', (text,json) => json.total )
+  // github-repositories
+  Fetch('https://api.github.com/users/Archivist-Nerd/repos?per_page=1000', '[data-github]', (text,json) => json.length )
+})
+</script>
 </html>
