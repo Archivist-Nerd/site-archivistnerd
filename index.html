@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="Description" content="Author: Archivist Nerd,
     Description: Details on items created in the process of completing 'the project.',
-    Size: 5.1kb">
+    Size: 6.5kb">
   <title>Down the Rabbit hole</title>
 </head>
 <style>
@@ -135,6 +135,10 @@ body {
 }
 </style>
 <body>
+<!--
+  author:  archivistnerd
+  version: 0.3.3   (blogger, tumblr)
+-->
 <div class="about">
   <div class="panel">
     <h1>@rabbit hole</h1>
@@ -142,8 +146,13 @@ body {
     <br>
     <h2>More details possibly found at</h2>
     <ul>
+      <li><a target="_blank" rel="noreferrer" href="https://archivistnerd.blogspot.com/"  >Blogger</a></li>
       <li><a target="_blank" rel="noreferrer" href="https://twitter.com/archivistnerd"    >Twitter</a></li>
-      <li><a target="_blank" rel="noreferrer" href="https://travis-ci.org/Archivist-Nerd/">travis-ci</a></li>
+      <li><a target="_blank" rel="noreferrer" href="https://travis-ci.com/Archivist-Nerd/">Travis-ci</a></li>
+      <li><a target="_blank" rel="noreferrer" href="https://archivistnerd.tumblr.com/"    >Tumblr</a></li>
+      <!--
+          <li><a target="_blank" rel="noreferrer" href=""></a></li>
+      -->
     </ul>
   </div>
 </div>
@@ -153,15 +162,15 @@ body {
     <h1>the Project</h1>
     <div class="item"><a target="_blank" rel="noreferrer" href="https://archivistnerd.netlify.app/"   ><h2            >1</h2><h3>website</h3></a></div>
     <div class="item"><a target="_blank" rel="noreferrer" href="https://www.npmjs.com/org/archivist"  ><h2 data-npmapp>.</h2><h3>tools (node)</h3></a></div>
-    <div class="item"><a target="_blank" rel="noreferrer" href="https://codepen.io/archivistnerd/pens/public?grid_type=list"><h2            >5</h2><h3>pens codepen.io</h3></a></div>
+    <div class="item"><a target="_blank" rel="noreferrer" href="https://codepen.io/archivistnerd/pens/public?grid_type=list"><h2            >6</h2><h3>pens codepen.io</h3></a></div>
     <div class="item"><a target="_blank" rel="noreferrer" href="https://www.npmjs.com/~archivistnerd" ><h2 data-npmpkg>.</h2><h3>npmjs packages</h3></a></div>
     <div class="item"><a target="_blank" rel="noreferrer" href="https://github.com/Archivist-Nerd"    ><h2 data-github>.</h2><h3>github repositories</h3></a></div>
   </div>
 </div>
-
+  
 <div class="footer">© 2020 <a target="_blank" rel="noreferrer" href="https://archivistnerd.netlify.app/">archivistnerd.</a></div>
 
-</body>
+  </body>
 <script>
 const Fetch = ( url, query='[data-error]', callback=()=>{} )=>{
       fetch( url ).then( res=> {
@@ -183,7 +192,32 @@ window.addEventListener('load',()=>{
   // npm-packages
   Fetch('https://registry.npmjs.org/-/v1/search?text=@archivistnerd&size=555', '[data-npmpkg]', (text,json) => json.total )
   // github-repositories
-  Fetch('https://api.github.com/users/Archivist-Nerd/repos?per_page=1000', '[data-github]', (text,json) => json.length )
+  Fetch('https://api.github.com/users/Archivist-Nerd/repos?per_page=1000', '[data-github]', (text,json) => {
+    let totalCodeSize = 0
+      , info = []
+      , spaces = '                                                                                       '
+      , col = (size, txt, left=true, spc=spaces.substr(0, size-(txt.toString().length) ))=>left? spc+txt:txt+spc
+      ;
+    console.clear()
+    Object.keys( json ).forEach( key => {
+      let item = json[key]
+        , name = item['name']
+        , size = item['size']
+        , fullname = item['full_name']
+        , created  = item['created_at']
+        , updated  = item['updated_at']
+        , forks    = item['forks']
+        , issues   = item['open_issues']
+        , watchers = item['watchers']
+        , details  = `${col(22, created, false)} ${col(22, updated)} ${col(6,size)}kb   ${col(20,name,false)} ${fullname}`
+        ;
+      info.push( details )
+      totalCodeSize+=size
+    })
+    console.log( info.sort().join('\n') )
+    console.log(totalCodeSize,'kb')
+    return json.length
+  })
 })
 </script>
 </html>
